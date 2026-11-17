@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>八度电影院官网-排片与观影指南</title>
+<meta name="description" content="八度电影院官网提供今日排片、IMAX与杜比厅选择、会员储值、退改签规则和影迷评论。查八度电影院官网最新上映影片、场次时间与优惠活动，含8个放映厅实况与选座建议。">
+<meta name="keywords" content="八度电影院官网">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b2340'/%3E%3Ccircle cx='11' cy='11' r='3' fill='%23f2b134'/%3E%3Ccircle cx='21' cy='11' r='3' fill='%23f2b134'/%3E%3Ccircle cx='11' cy='21' r='3' fill='%23f2b134'/%3E%3Ccircle cx='21' cy='21' r='3' fill='%23f2b134'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#1b2340;
+  --ink-2:#39415c;
+  --muted:#6b7280;
+  --line:#e2e4ec;
+  --bg:#f6f7fb;
+  --paper:#ffffff;
+  --brand:#1b2340;
+  --accent:#d97706;
+  --accent-soft:#fdf3e3;
+  --teal:#0f766e;
+  --teal-soft:#e8f5f3;
+  --radius:14px;
+  --radius-sm:8px;
+  --shadow:0 2px 10px rgba(27,35,64,.06);
+  --shadow-hover:0 6px 18px rgba(27,35,64,.12);
+  --space:20px;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --sticky-h:104px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.75;font-size:15.5px}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:1.2em}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+[id]{scroll-margin-top:calc(var(--sticky-h) + 14px)}
+
+/* 公告条 */
+.announce{background:var(--brand);color:#e9ecf6;font-size:13.5px;padding:9px 0;position:sticky;top:0;z-index:60}
+.announce .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.announce .tag{background:var(--accent);color:#fff;border-radius:4px;padding:1px 8px;font-size:12px;font-weight:700;letter-spacing:.5px}
+.announce a{text-decoration:underline;text-underline-offset:3px;color:#ffd9a0}
+
+/* 页头 */
+header.site{position:sticky;top:37px;z-index:55;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-inner{display:flex;align-items:center;gap:18px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand svg{width:34px;height:34px}
+.brand b{font-size:18px;letter-spacing:.5px;color:var(--ink);white-space:nowrap}
+nav.mainnav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+nav.mainnav a{padding:7px 12px;border-radius:8px;font-size:14.5px;color:var(--ink-2);white-space:nowrap}
+nav.mainnav a:hover{background:var(--accent-soft);color:var(--accent)}
+.header-tools{display:flex;align-items:center;gap:8px}
+.searchbox{position:relative}
+.searchbox input{width:168px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;background:var(--bg);outline:none}
+.searchbox input:focus{border-color:var(--accent);background:#fff}
+.search-feedback{position:absolute;top:110%;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow-hover);font-size:13px;padding:8px 10px;display:none;z-index:70}
+.search-feedback.show{display:block}
+.btn-ticket{background:var(--accent);color:#fff;border:none;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;white-space:nowrap}
+.btn-ticket:hover{background:#b45f04}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:14px}
+
+/* 首屏 */
+.hero{background:linear-gradient(160deg,#1b2340 0%,#2b3660 55%,#1b2340 100%);color:#eef1f8;padding:52px 0 46px;position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(28px,4vw,44px);letter-spacing:1px;margin-bottom:14px;color:#fff}
+.hero .lead{color:#c8cfe4;font-size:16.5px;max-width:34em}
+.hero .lead strong{color:#ffd9a0}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hero-actions a{padding:11px 22px;border-radius:999px;font-weight:600;font-size:15px}
+.hero-actions .primary{background:var(--accent);color:#fff}
+.hero-actions .ghost{border:1px solid rgba(255,255,255,.45);color:#fff}
+.hero-figure{position:relative;min-height:250px}
+.screen-svg{width:100%;height:auto;display:block}
+
+/* 网格 */
+.layout{display:grid;grid-template-columns:1fr 320px;gap:34px;padding:40px 0}
+.section{margin-bottom:44px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.section-head h2{font-size:22px;color:var(--ink);border-left:5px solid var(--accent);padding-left:12px}
+.section-head .note{font-size:13px;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+figure{margin:0}
+.card-img{width:100%;height:150px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0}
+.card-body{padding:16px 18px}
+.card-body h3{font-size:16.5px;margin-bottom:8px}
+.card-body p{font-size:14px;color:var(--ink-2);margin-bottom:10px}
+.meta{font-size:12.5px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.badge{display:inline-block;background:var(--teal-soft);color:var(--teal);border-radius:5px;padding:1px 8px;font-size:12px;font-weight:600}
+.badge-orange{background:var(--accent-soft);color:var(--accent)}
+.tagline{display:flex;flex-wrap:wrap;gap:8px}
+.tagline a{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:#fff;color:var(--ink-2)}
+.tagline a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* 紧凑列表 */
+.list-rows{list-style:none;padding:0;margin:0}
+.list-rows li{display:flex;gap:14px;align-items:baseline;padding:11px 4px;border-bottom:1px dashed var(--line);font-size:14.5px}
+.list-rows li:last-child{border-bottom:none}
+.list-rows time{color:var(--accent);font-weight:700;font-size:13px;min-width:64px;flex-shrink:0}
+.list-rows .desc{color:var(--muted);font-size:13px;margin-left:auto;text-align:right}
+
+/* 分类索引 */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cat-grid a{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 12px;text-align:center;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+.cat-grid a span{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:3px}
+.cat-grid a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* 正文分栏 */
+.article-feature{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow)}
+.article-feature h2{font-size:23px;margin-bottom:6px;border:none;padding:0}
+.article-feature .kicker{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.article-feature h3{font-size:17.5px;margin:22px 0 8px;color:var(--ink)}
+.article-feature p{font-size:15px;color:var(--ink-2)}
+.pullquote{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:14.5px;color:var(--ink);margin:16px 0}
+.compare-table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 4px}
+.compare-table th,.compare-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.compare-table th{background:var(--bg);font-weight:600}
+.fact-check{background:var(--teal-soft);border-radius:var(--radius-sm);padding:12px 16px;font-size:14px;margin:14px 0}
+
+/* 体验指南步骤 */
+.steps{counter-reset:step;list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.steps li{counter-increment:step;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px 14px 58px;position:relative;font-size:14.5px}
+.steps li::before{content:counter(step);position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.steps b{display:block;margin-bottom:2px;color:var(--ink)}
+
+/* FAQ */
+details.faq{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden}
+details.faq summary{padding:13px 16px;font-weight:600;font-size:15px;cursor:pointer;list-style:none;position:relative;padding-right:40px}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";position:absolute;right:16px;top:11px;font-size:19px;color:var(--accent);font-weight:400}
+details.faq[open] summary::after{content:"–"}
+details.faq .faq-a{padding:0 16px 15px;font-size:14.5px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:12px}
+
+/* 评论 */
+.review{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:14.5px}
+.review .who{font-size:13px;color:var(--muted);margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.stars{color:var(--accent);font-weight:700;font-size:13px}
+.review p{margin:0;color:var(--ink-2)}
+
+/* 侧栏 */
+aside.side{position:relative}
+.side-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:20px;box-shadow:var(--shadow)}
+.side-card h3{font-size:16px;margin-bottom:12px}
+.side-card h3 small{font-weight:400;color:var(--muted);font-size:12px;margin-left:6px}
+aside .sticky-nav{position:sticky;top:calc(var(--sticky-h) + 8px)}
+.sidenav{list-style:none;margin:0;padding:0}
+.sidenav a{display:block;padding:7px 10px;border-radius:7px;font-size:14px;color:var(--ink-2);border-left:3px solid transparent}
+.sidenav a:hover{background:var(--bg)}
+.sidenav a.active{background:var(--accent-soft);color:var(--accent);border-left-color:var(--accent);font-weight:600}
+.timeline{list-style:none;margin:0;padding:0 0 0 16px;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 14px 10px;font-size:13.5px;color:var(--ink-2)}
+.timeline li::before{content:"";position:absolute;left:-21px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.timeline time{display:block;color:var(--muted);font-size:12.5px}
+
+/* 相关资讯 grid */
+.news-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.news-list li{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 15px}
+.news-list b{font-size:14.5px;display:block;margin-bottom:3px}
+.news-list span{font-size:13px;color:var(--muted)}
+
+/* 页脚 */
+footer.site{background:#151b33;color:#aab2c8;padding:40px 0 22px;margin-top:30px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
+footer b.foot-brand{color:#fff;font-size:17px;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+footer h4{color:#e7eaf3;font-size:14.5px;margin-bottom:10px}
+footer a{color:#aab2c8;font-size:13.5px;display:block;padding:3px 0}
+footer a:hover{color:#ffd9a0}
+footer p{font-size:13px;color:#8b94ae;line-height:1.7}
+.foot-bottom{border-top:1px solid #2a3150;margin-top:26px;padding-top:16px;font-size:12.5px;color:#7c86a3;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+#toTop{position:fixed;right:18px;bottom:72px;z-index:80;background:var(--brand);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:16px;box-shadow:var(--shadow-hover);opacity:0;pointer-events:none;transition:opacity .25s;display:grid;place-items:center}
+#toTop.show{opacity:1;pointer-events:auto}
+
+@media (max-width:1020px){
+  .layout{grid-template-columns:1fr}
+  aside.side{order:2}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-figure{max-width:460px}
+  .grid3{grid-template-columns:repeat(2,1fr)}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  footer .cols{grid-template-columns:1fr 1fr}
+  aside .sticky-nav{position:static}
+}
+@media (max-width:720px){
+  :root{--sticky-h:96px}
+  .header-inner{flex-wrap:wrap;height:auto;padding:10px 0;gap:10px}
+  header.site{top:37px}
+  nav.mainnav{display:none;order:5;width:100%;margin:0;flex-direction:column;gap:2px}
+  nav.mainnav.open{display:flex}
+  .menu-toggle{display:block;margin-left:auto}
+  .header-tools{margin-left:auto}
+  .searchbox input{width:132px}
+  .btn-ticket{padding:7px 12px;font-size:13px}
+  .grid3,.grid2,.cat-grid{grid-template-columns:1fr}
+  .cat-grid a{text-align:left;display:flex;justify-content:space-between;align-items:center}
+  .hero{padding:36px 0}
+  .article-feature{padding:20px 18px}
+  .list-rows li{flex-wrap:wrap}
+  .list-rows .desc{margin-left:0;text-align:left;width:100%}
+  footer .cols{grid-template-columns:1fr}
+  #toTop{bottom:18px}
+  .announce .wrap{font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .card:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="announce" role="region" aria-label="影院公告">
+  <div class="wrap">
+    <span class="tag">今日更新</span>
+    <span>2026年11月8日 · 3号IMAX厅《沙丘：救世主》加开 22:40 场；7号厅空调检修，11月9日恢复。</span>
+    <a href="/#news">查看排片变更 →</a>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap header-inner">
+    <a class="brand" href="/#top" aria-label="八度电影院官网首页">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="9" fill="#1b2340"/>
+        <circle cx="13" cy="13" r="3.4" fill="#f2b134"/>
+        <circle cx="27" cy="13" r="3.4" fill="#f2b134"/>
+        <circle cx="13" cy="27" r="3.4" fill="#f2b134"/>
+        <circle cx="27" cy="27" r="3.4" fill="#f2b134"/>
+        <rect x="17" y="9" width="6" height="22" rx="2" fill="#eef1f8" opacity=".9"/>
+      </svg>
+      <b>八度电影院官网</b>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">菜单 ☰</button>
+    <nav class="mainnav" id="mainnav" aria-label="主题导航">
+      <a href="/#overview">影城概览</a>
+      <a href="/#picks">本周精选</a>
+      <a href="/#schedule">今日排片</a>
+      <a href="/#channels">频道索引</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">购票指南</a>
+      <a href="/#faq">常见问题</a>
+    </nav>
+    <div class="header-tools">
+      <div class="searchbox">
+        <input type="search" id="siteSearch" placeholder="搜影片 / 厅号 / 规则" aria-label="站内搜索">
+        <div class="search-feedback" id="searchFeedback" role="status"></div>
+      </div>
+      <a class="btn-ticket" href="/#schedule">在线购票</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>八度电影院官网</h1>
+      <p class="lead">八度电影院官网是一套 8 厅城市影城的线上入口：3 号 IMAX 厅、5 号杜比全景声厅、宠物友好 8 号小厅同时在线。今天 11 月 8 日共 47 场，最早 09:20《日掛中天》，最晚 23:50《疯狂动物城2》重映场。选座、退改、储值都在同一账号下完成。</p>
+      <div class="hero-actions">
+        <a class="primary" href="/#schedule">看今天 47 场排片</a>
+        <a class="ghost" href="/#guide">退改签怎么算</a>
+      </div>
+      <p class="meta" style="margin-top:20px;color:#9aa5c2">8 个影厅 · 1,264 个座位 · 4 台自助取票机 · 停车 2 小时免费</p>
+    </div>
+    <div class="hero-figure" aria-hidden="true">
+      <svg class="screen-svg" viewBox="0 0 420 300" role="img" aria-label="影厅银幕与座位示意">
+        <defs>
+          <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f7e2b8"/>
+            <stop offset="1" stop-color="#d97706"/>
+          </linearGradient>
+        </defs>
+        <rect x="20" y="18" width="380" height="88" rx="10" fill="url(#scr)" opacity=".92"/>
+        <rect x="20" y="18" width="380" height="88" rx="10" fill="none" stroke="#ffd9a0" stroke-width="2" opacity=".6"/>
+        <text x="210" y="72" text-anchor="middle" font-size="15" fill="#3a2505" font-family="sans-serif" font-weight="700">3 号 IMAX 厅 · 银幕 22m × 12m</text>
+        <g fill="#8d97b8">
+          <circle cx="60" cy="150" r="8"/><circle cx="96" cy="150" r="8"/><circle cx="132" cy="150" r="8"/>
+          <circle cx="168" cy="150" r="8"/><circle cx="204" cy="150" r="8"/><circle cx="240" cy="150" r="8"/>
+          <circle cx="276" cy="150" r="8"/><circle cx="312" cy="150" r="8"/><circle cx="348" cy="150" r="8"/>
+          <circle cx="60" cy="184" r="8"/><circle cx="96" cy="184" r="8"/><circle cx="132" cy="184" r="8"/>
+          <circle cx="168" cy="184" r="8"/><circle cx="204" cy="184" r="8"/><circle cx="240" cy="184" r="8"/>
+          <circle cx="276" cy="184" r="8"/><circle cx="312" cy="184" r="8"/><circle cx="348" cy="184" r="8"/>
+          <circle cx="60" cy="218" r="8"/><circle cx="96" cy="218" r="8"/><circle cx="132" cy="218" r="8"/>
+          <circle cx="168" cy="218" r="8"/><circle cx="204" cy="218" r="8"/><circle cx="240" cy="218" r="8"/>
+          <circle cx="276" cy="218" r="8"/><circle cx="312" cy="218" r="8"/><circle cx="348" cy="218" r="8"/>
+        </g>
+        <g fill="#f2b134">
+          <circle cx="204" cy="184" r="8"/><circle cx="240" cy="184" r="8"/><circle cx="276" cy="150" r="8"/>
+        </g>
+        <text x="210" y="262" text-anchor="middle" font-size="12" fill="#9aa5c2" font-family="sans-serif">黄色为已售 · 灰色可选 · 中间黄金位剩余 12 座</text>
+        <text x="210" y="284" text-anchor="middle" font-size="12" fill="#6f7a9c" font-family="sans-serif">11月8日 19:30 场</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="wrap layout">
+
+<main>
+
+  <section class="section" id="overview">
+    <div class="section-head">
+      <h2>影城概览：8 个厅各自适合什么片</h2>
+      <span class="note">数据截至 2026-11-08 10:00</span>
+    </div>
+    <div class="grid3">
+      <article class="card">
+        <div class="card-body">
+          <h3>3 号 IMAX 厅</h3>
+          <p>22m×12m 银幕，激光放映，1.43:1 与 1.90:1 双画幅切换。本周《沙丘：救世主》全片 1.90:1，无遮幅。</p>
+          <div class="meta"><span class="badge">332 座</span><span>今日 9 场</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-body">
+          <h3>5 号杜比全景声厅</h3>
+          <p>64 声道，顶置扬声器两排。低频强的片子建议坐 8—10 排，前 5 排震感偏重。</p>
+          <div class="meta"><span class="badge">198 座</span><span>今日 7 场</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-body">
+          <h3>8 号宠物友好小厅</h3>
+          <p>42 座，允许牵绳小型犬入场，每周六 14:00 固定宠物场。11 月 8 日场为《猫猫的奇幻漂流》。</p>
+          <div class="meta"><span class="badge-orange badge">需签承诺书</span><span>今日 3 场</span></div>
+        </div>
+      </article>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">其余 1、2、4、6、7 号厅为标准厅，6 号厅为 4K 60 帧影厅，7 号厅本周空调检修，11 月 9 日恢复。全场 1,264 座，含 6 个轮椅位。</p>
+  </section>
+
+  <section class="section" id="picks">
+    <div class="section-head">
+      <h2>本周精选内容推荐</h2>
+      <span class="note">只列 11 月 6 日至 11 月 12 日有场次的影片</span>
+    </div>
+    <div class="grid2">
+      <article class="card">
+        <img class="card-img" src="https://picsum.photos/seed/octocine-dune/640/300" width="640" height="300" loading="lazy" alt="沙漠巨型飞船场景概念图">
+        <div class="card-body">
+          <h3>《沙丘：救世主》IMAX 原版</h3>
+          <p>165 分钟，中英字幕。维伦纽瓦把第三幕压到 40 分钟内，节奏比前作快。建议选 3 号厅 19:30 场，映前 8 分钟有主创彩蛋。</p>
+          <div class="meta"><span class="badge">IMAX 专属画幅</span><span>今日 4 场</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <img class="card-img" src="https://picsum.photos/seed/octocine-sun/640/300" width="640" height="300" loading="lazy" alt="南方小城街道与片名海报示意">
+        <div class="card-body">
+          <h3>《日掛中天》粤语原声</h3>
+          <p>112 分钟，导演蔡尚君，辛芷蕾、张颂文主演。粤语对白配中文字幕，2 号厅每天 09:20 与 16:10 两场。</p>
+          <div class="meta"><span class="badge">金狮提名</span><span>今日 2 场</span></div>
+        </div>
+      </article>
+    </div>
+    <div class="tagline" style="margin-top:16px">
+      <a href="/#channels">IMAX 画幅对比片单</a>
+      <a href="/#schedule">杜比全景声午夜场</a>
+      <a href="/#guide">粤语原声怎么选厅</a>
+      <a href="/#reviews">影迷短评合集</a>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="section-head">
+      <h2>最新更新：今天 11 月 8 日排片变动</h2>
+      <span class="note">实时以票务机与取票机为准</span>
+    </div>
+    <ul class="list-rows">
+      <li><time>10:05</time><span>3 号 IMAX 厅《沙丘：救世主》加开 22:40 场，11 月 7 日预售未满 30%，临时放场。</span><span class="desc">已开售</span></li>
+      <li><time>09:40</time><span>7 号厅空调故障，今日《惊天魔盗团3》3 场调整至 4 号厅，已购票观众原座平移。</span><span class="desc">座位不变</span></li>
+      <li><time>昨天 18:20</time><span>8 号宠物场《猫猫的奇幻漂流》改为 14:00 开场，比原排片提前 30 分钟。</span><span class="desc">6 单已通知</span></li>
+      <li><time>昨天 15:00</time><span>《疯狂动物城2》重映场定档 11 月 11 日，5 号厅 19:50 仅一场。</span><span class="desc">预售开启</span></li>
+      <li><time>11 月 6 日</time><span>会员日调整为每周二，11 月 10 日 19:00 场储值卡 8 折，限前 200 张。</span><span class="desc">规则已生效</span></li>
+      <li><time>11 月 5 日</time><span>6 号厅升级 4K 60 帧放映机，票价不变，本周《阿凡达3》试片 2 场。</span><span class="desc">设备已换</span></li>
+    </ul>
+  </section>
+
+  <section class="section" id="channels">
+    <div class="section-head">
+      <h2>频道索引：按观影需求找入口</h2>
+      <span class="note">11 个频道</span>
+    </div>
+    <div class="cat-grid">
+      <a href="/#picks">IMAX 画幅<span>3 号厅排片</span></a>
+      <a href="/#picks">杜比全景声<span>5 号厅声效</span></a>
+      <a href="/#picks">4K 60 帧厅<span>6 号厅</span></a>
+      <a href="/#guide">宠物友好场<span>8 号厅规则</span></a>
+      <a href="/#guide">亲子动画场<span>周末上午</span></a>
+      <a href="/#reviews">午夜场<span>22:40 后</span></a>
+      <a href="/#deep">导演剪辑版<span>重映片单</span></a>
+      <a href="/#news">退改签规则<span>阶梯费率</span></a>
+      <a href="/#faq">会员储值<span>充值优惠</span></a>
+      <a href="/#faq">包场与团票<span>20 人起</span></a>
+      <a href="/#guide">停车与取票<span>2 小时免费</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="deep">
+    <div class="article-feature">
+      <div class="kicker">深度解析</div>
+      <h2>IMAX 厅的黄金位，未必是中间那一排</h2>
+      <p>3 号厅 332 座，银幕下沿离地 1.2m，第一排仰角约 34°。按 THX 建议的 36° 视场角上限，第 6 排中心 1—2 座其实是视觉最舒服的位置，而不是多数人抢的第 10 排。这句话可以被反驳：IMAX 片幅 1.90:1 时画面上沿更高，仰角感受会被放大，坐太近反而要抬下巴。</p>
+
+      <h3>三个档位的实测差别：11 月 7 日 19:30 场</h3>
+      <p>同场 332 张票，第 6 排 8 座、第 10 排 10 座、第 14 排 12 座各抽样记录了 3 位观众的反馈。第 6 排两位提到“字幕需要轻微下移视线”，一位说“画面填满视野，沙虫出场有压迫感”；第 10 排三人均表示“脖子不累”；第 14 排一位表示“银幕边缘有轻微弯折感”，原因是后排视线与银幕弧面夹角变大。</p>
+      <table class="compare-table">
+        <thead><tr><th>位置</th><th>仰角</th><th>视场覆盖</th><th>适合人群</th></tr></thead>
+        <tbody>
+          <tr><td>第 4—6 排</td><td>28°—34°</td><td>约 88%</td><td>追求沉浸、能接受抬头</td></tr>
+          <tr><td>第 8—10 排</td><td>20°—25°</td><td>约 82%</td><td>长时间观影、脖子敏感</td></tr>
+          <tr><td>第 12—14 排</td><td>14°—18°</td><td>约 74%</td><td>中途离场、带小孩</td></tr>
+        </tbody>
+      </table>
+
+      <h3>“中间最好”这条经验是从普通厅迁移来的</h3>
+      <p>2 号标准厅银幕 12m×6.7m，厅深 18m，中间排恰好落在 1.5 倍银幕高度处，符合 SMPTE 的观影距离建议。3 号厅厅深只有 16m，银幕却高 12m，比例变了，中间排的相对位置也就前移。把标准厅的经验直接套到 IMAX 厅，会把黄金位算后 3 排左右。</p>
+      <div class="pullquote">一句话结论：3 号厅优先抢第 6—7 排中间；如果片长超过 150 分钟，退到第 9 排更划算。这句话只适用于 1.90:1 画幅，遇到 1.43:1 片源需要重新算。</div>
+
+      <h3>可核对的三条判断依据</h3>
+      <ol class="steps">
+        <li><b>银幕高度差</b>3 号厅 12m，2 号厅 6.7m，前者是后者的 1.79 倍，而厅深只差 2m。</li>
+        <li><b>排距</b>3 号厅排距 1.15m，比 5 号厅的 1.05m 宽 10cm，前后排遮挡风险低，前排可坐。</li>
+        <li><b>字幕位置</b>3 号厅字幕投在下沿上方 0.4m，第 6 排视线下移约 9°，属于可接受范围。</li>
+      </ol>
+      <div class="fact-check"><strong>事实与推测分开：</strong>排距 1.15m、银幕 12m、厅深 16m 为影城 2026 年 10 月改造后的工程参数，可现场核对；“第 6 排最舒服”来自 9 份映后问卷，样本小，属于倾向性判断，不作定论。</div>
+    </div>
+  </section>
+
+  <section class="section" id="guide">
+    <div class="section-head">
+      <h2>体验指南：从买票到散场的五步</h2>
+      <span class="note">适用于工作日与周末全时段</span>
+    </div>
+    <ol class="steps">
+      <li><b>提前 30 分钟选座</b>《沙丘：救世主》今日 19:30 场 10:00 时余票 61 张，IMAX 厅黄金位售罄速度快于普通厅约 2 倍。线上选座支持改签一次，改签费 5 元。</li>
+      <li><b>取票机位置</b>一层大堂 4 台自助机，2 台支持刷脸。二层扶梯口另有 1 台，19:00—20:00 排队通常短 5 分钟。</li>
+      <li><b>入场时间</b>映前 15 分钟检票，IMAX 厅映前 8 分钟停止入场，迟到需走侧门。宠物场需在检票口签承诺书。</li>
+      <li><b>眼镜与座椅</b>3D 眼镜押金 20 元，可自带。5 号厅座椅可调倾角 15°，按钮在扶手内侧。</li>
+      <li><b>散场与停车</b>凭当日票根到一层服务台盖章，停车 2 小时免费，超时每小时 6 元。末场 23:50 散场后仅开放 B1 出口。</li>
+    </ol>
+    <p style="font-size:14px;color:var(--muted);margin-top:12px">带小孩看《疯狂动物城2》重映场，建议选 5 号厅 19:50 场，片长 108 分钟，散场 21:38，不影响次日上学。</p>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="section-head">
+      <h2>常见问题</h2>
+      <span class="note">规则以 2026 年 11 月 1 日版为准</span>
+    </div>
+    <details class="faq">
+      <summary>IMAX 厅和杜比全景声厅票价差多少？</summary>
+      <div class="faq-a">3 号 IMAX 厅普通场 78 元，会员 62 元；5 号杜比全景声厅普通场 58 元，会员 46 元。差价 20 元主要来自银幕与激光放映成本。周二会员日两厅再各减 6 元。</div>
+    </details>
+    <details class="faq">
+      <summary>电影票可以退吗？退票费怎么算？</summary>
+      <div class="faq-a">开场前 2 小时以上退票收 5% 手续费；2 小时以内收 20%；开场后不可退。改签每单限一次，收 5 元。11 月 7 日 19:30 场因 7 号厅故障调整到 4 号厅的订单，可全额退，不收手续费。</div>
+    </details>
+    <details class="faq">
+      <summary>宠物友好场对犬只有什么要求？</summary>
+      <div class="faq-a">8 号厅允许体重 15kg 以下、牵绳的小型犬入场，需出示一年内狂犬疫苗证明并在检票口签承诺书。每场限 10 只，犬只不得占座。11 月 8 日 14:00 场已预约 7 只。</div>
+    </details>
+    <details class="faq">
+      <summary>会员储值卡怎么充值最划算？</summary>
+      <div class="faq-a">充 500 元赠 50 元，充 1000 元赠 130 元，赠额当天到账，有效期 12 个月。11 月 10 日会员日 19:00 场额外 8 折，限前 200 张，储值卡与折扣可叠加。</div>
+    </details>
+    <details class="faq">
+      <summary>包场或 20 人以上团票怎么联系？</summary>
+      <div class="faq-a">8 号厅整场 42 座，工作日包场 1,600 元起；20 人以上团票按厅另议。需提前 3 个工作日在一层服务台登记，可指定影片与开场时间。</div>
+    </details>
+  </section>
+
+  <section class="section" id="reviews">
+    <div class="section-head">
+      <h2>影迷评论：指向具体场次与座位</h2>
+      <span class="note">来自购票账号公开评价，共 14 条节选</span>
+    </div>
+    <div class="grid2">
+      <div class="review">
+        <div class="who"><span>阿澈</span><span class="stars">★★★★★</span><span>11 月 7 日 19:30 · 3 号厅 6 排 8 座</span></div>
+        <p>第 6 排确实比想象中近，但沙虫第一次出场那一下，脖子后仰完全值回票价。字幕要往下瞟一点，能忍。</p>
+      </div>
+      <div class="review">
+        <div class="who"><span>老周</span><span class="stars">★★★☆☆</span><span>11 月 7 日 19:30 · 3 号厅 14 排 5 座</span></div>
+        <p>坐后排看 IMAX 有点亏，画面边缘发弯，视野里塞进了两侧墙。下次听劝买 9 排。</p>
+      </div>
+      <div class="review">
+        <div class="who"><span>Lin</span><span class="stars">★★★★☆</span><span>11 月 8 日 09:20 · 2 号厅</span></div>
+        <p>《日掛中天》粤语原声排早场有点可惜，九点二十到场的人不到三成。片子好，辛芷蕾那场雨戏值得单独二刷。</p>
+      </div>
+      <div class="review">
+        <div class="who"><span>带狗看片的人</span><span class="stars">★★★★☆</span><span>11 月 8 日 14:00 · 8 号厅</span></div>
+        <p>宠物场检票口的承诺书流程比上次顺，就是厅里空调有点冷，给狗垫了外套。42 个座，7 只狗，没打架。</p>
+      </div>
+      <div class="review">
+        <div class="who"><span>不高兴</span><span class="stars">★★☆☆☆</span><span>11 月 7 日 · 7 号厅调整场</span></div>
+        <p>空调坏了换厅我能理解，但短信提示 18:20 才发，人已经在路上了。4 号厅座位原样平移，这点还行。</p>
+      </div>
+      <div class="review">
+        <div class="who"><span>午夜场常客</span><span class="stars">★★★★★</span><span>11 月 8 日 22:40 · 3 号厅</span></div>
+        <p>刚抢到加开的 22:40 场，第 9 排。散场走 B1 出口，停车 2 小时免费刚好够，末场这点安排挺贴心。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="news">
+    <div class="section-head">
+      <h2>相关资讯</h2>
+      <span class="note">影城与片方动态</span>
+    </div>
+    <ul class="news-list">
+      <li><b>《沙丘：救世主》内地票房破 4.2 亿，IMAX 票房产出占比 31%</b><span>11 月 7 日 · 片方发布，八度 3 号厅上座率 78%</span></li>
+      <li><b>6 号厅完成 4K 60 帧放映机更换，票价维持 58 元不变</b><span>11 月 5 日 · 影城设备公告</span></li>
+      <li><b>《疯狂动物城2》定档 11 月 11 日重映，5 号厅仅 19:50 一场</b><span>11 月 7 日 · 排片系统确认</span></li>
+      <li><b>《日掛中天》粤语原声版密钥延期至 11 月 30 日</b><span>11 月 6 日 · 发行方通知</span></li>
+    </ul>
+  </section>
+
+  <section class="section" id="related">
+    <div class="section-head">
+      <h2>相关推荐</h2>
+      <span class="note">按关键词直接搜</span>
+    </div>
+    <div class="tagline">
+      <a href="/#deep">IMAX 第 6 排体验</a>
+      <a href="/#guide">宠物友好看电影</a>
+      <a href="/#faq">会员储值卡充值优惠</a>
+      <a href="/#schedule">今日 IMAX 排片</a>
+      <a href="/#reviews">粤语原声场次评价</a>
+      <a href="/#guide">停车 2 小时免费攻略</a>
+      <a href="/#faq">退票手续费阶梯</a>
+      <a href="/#guide">亲子动画周末场</a>
+      <a href="/#news">午夜场散场出口</a>
+      <a href="/#faq">包场 42 座价格</a>
+    </div>
+  </section>
+
+</main>
+
+<aside class="side">
+  <div class="sticky-nav">
+    <div class="side-card">
+      <h3>栏目导航 <small>滚动高亮</small></h3>
+      <ul class="sidenav" id="sidenav">
+        <li><a href="/#overview">影城概览</a></li>
+        <li><a href="/#picks">本周精选</a></li>
+        <li><a href="/#schedule">最新更新</a></li>
+        <li><a href="/#channels">频道索引</a></li>
+        <li><a href="/#deep">深度解析</a></li>
+        <li><a href="/#guide">体验指南</a></li>
+        <li><a href="/#faq">常见问题</a></li>
+        <li><a href="/#reviews">影迷评论</a></li>
+        <li><a href="/#news">相关资讯</a></li>
+        <li><a href="/#related">相关推荐</a></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>今日场次时间线 <small>11月8日</small></h3>
+      <ul class="timeline">
+        <li><time>09:20</time>2 号厅《日掛中天》粤语</li>
+        <li><time>14:00</time>8 号厅宠物场《猫猫的奇幻漂流》</li>
+        <li><time>16:10</time>2 号厅《日掛中天》</li>
+        <li><time>19:30</time>3 号厅《沙丘：救世主》IMAX</li>
+        <li><time>19:50</time>5 号厅《惊天魔盗团3》</li>
+        <li><time>22:40</time>3 号厅《沙丘：救世主》加开</li>
+        <li><time>23:50</time>5 号厅《疯狂动物城2》预映</li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>会员日提示 <small>11月10日</small></h3>
+      <p style="font-size:14px;color:var(--ink-2);margin:0">19:00 场储值卡 8 折，限前 200 张；充 1000 赠 130。规则 11 月 6 日生效，可与会员日折扣叠加。</p>
+    </div>
+  </div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <b class="foot-brand">
+          <svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true">
+            <rect width="40" height="40" rx="9" fill="#f2b134"/>
+            <circle cx="13" cy="13" r="3.4" fill="#1b2340"/>
+            <circle cx="27" cy="13" r="3.4" fill="#1b2340"/>
+            <circle cx="13" cy="27" r="3.4" fill="#1b2340"/>
+            <circle cx="27" cy="27" r="3.4" fill="#1b2340"/>
+          </svg>
+          八度电影院官网
+        </b>
+        <p>8 厅城市影城，IMAX 与杜比全景声同时在线，工作日也不缺好座位。</p>
+        <p>页面更新于 2026-11-08，对应正文可核对项：排片变动 6 条、退改规则 1 条、会员日调整 1 条。</p>
+      </div>
+      <div>
+        <h4>观影频道</h4>
+        <a href="/#picks">IMAX 画幅</a>
+        <a href="/#picks">杜比全景声</a>
+        <a href="/#guide">宠物友好场</a>
+        <a href="/#guide">亲子动画场</a>
+      </div>
+      <div>
+        <h4>服务入口</h4>
+        <a href="/#schedule">今日排片</a>
+        <a href="/#faq">退改签规则</a>
+        <a href="/#faq">会员储值</a>
+        <a href="/#faq">包场与团票</a>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <a href="/#overview">影城概览</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#reviews">影迷评论</a>
+        <a href="/#news">相关资讯</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 八度电影院官网 · 示例数据，仅供页面演示</span>
+      <span>营业 09:00—24:00 · 一层服务台可办理改签与盖章</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="回到顶部">↑</button>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"八度电影院官网",
+  "alternateName":"八度影城",
+  "inLanguage":"zh-CN",
+  "description":"八度电影院官网提供今日排片、IMAX与杜比厅选择、会员储值、退改签规则和影迷评论。",
+  "publisher":{"@type":"Organization","name":"八度电影院官网"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"IMAX 厅和杜比全景声厅票价差多少？","acceptedAnswer":{"@type":"Answer","text":"3 号 IMAX 厅普通场 78 元，会员 62 元；5 号杜比全景声厅普通场 58 元，会员 46 元，差价 20 元。周二会员日两厅再各减 6 元。"}},
+    {"@type":"Question","name":"电影票可以退吗？退票费怎么算？","acceptedAnswer":{"@type":"Answer","text":"开场前 2 小时以上退票收 5% 手续费，2 小时以内收 20%，开场后不可退。改签每单限一次收 5 元。因厅故障调整的订单可全额退。"}},
+    {"@type":"Question","name":"宠物友好场对犬只有什么要求？","acceptedAnswer":{"@type":"Answer","text":"8 号厅允许体重 15kg 以下、牵绳的小型犬入场，需出示一年内狂犬疫苗证明并签承诺书，每场限 10 只，犬只不得占座。"}},
+    {"@type":"Question","name":"会员储值卡怎么充值最划算？","acceptedAnswer":{"@type":"Answer","text":"充 500 元赠 50 元，充 1000 元赠 130 元，赠额当天到账，有效期 12 个月。11 月 10 日会员日 19:00 场额外 8 折，限前 200 张。"}},
+    {"@type":"Question","name":"包场或 20 人以上团票怎么联系？","acceptedAnswer":{"@type":"Answer","text":"8 号厅整场 42 座，工作日包场 1600 元起，20 人以上团票按厅另议，需提前 3 个工作日在一层服务台登记。"}}
+  ]
+}
+</script>
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuToggle');
+  var nav=document.getElementById('mainnav');
+  if(menuBtn&&nav){
+    menuBtn.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded',open?'true':'false');
+      menuBtn.textContent=open?'收起 ✕':'菜单 ☰';
+    });
+    nav.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&window.innerWidth<=720){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+        menuBtn.textContent='菜单 ☰';
+      }
+    });
+  }
+
+  var topBtn=document.getElementById('toTop');
+  function onScroll(){
+    if(window.scrollY>420){topBtn.classList.add('show');}else{topBtn.classList.remove('show');}
+    highlight();
+  }
+  topBtn.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  var links=[].slice.call(document.querySelectorAll('#sidenav a'));
+  var sections=links.map(function(a){
+    return document.querySelector(a.getAttribute('href').replace('/#','#'));
+  });
+  function highlight(){
+    var pos=window.scrollY+180,cur=-1;
+    sections.forEach(function(s,i){
+      if(s&&s.offsetTop<=pos){cur=i;}
+    });
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur);});
+  }
+  highlight();
+
+  var input=document.getElementById('siteSearch');
+  var fb=document.getElementById('searchFeedback');
+  var index=[
+    {t:'沙丘：救世主 IMAX 3 号厅 19:30 场',id:'#picks'},
+    {t:'日掛中天 粤语原声 2 号厅',id:'#picks'},
+    {t:'今日排片与变动 11 月 8 日',id:'#schedule'},
+    {t:'IMAX 黄金位 第 6 排 深度解析',id:'#deep'},
+    {t:'退改签规则 手续费阶梯',id:'#faq'},
+    {t:'宠物友好场 8 号厅 承诺书',id:'#guide'},
+    {t:'会员储值 充 1000 赠 130',id:'#faq'},
+    {t:'停车 2 小时免费 取票机',id:'#guide'},
+    {t:'包场 42 座 团票价格',id:'#faq'},
+    {t:'影迷评论 3 号厅 14 排',id:'#reviews'},
+    {t:'疯狂动物城2 重映 5 号厅',id:'#news'},
+    {t:'杜比全景声 5 号厅 声效',id:'#overview'}
+  ];
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  input.addEventListener('input',function(){
+    var q=input.value.trim();
+    if(!q){fb.classList.remove('show');fb.innerHTML='';return;}
+    var hits=index.filter(function(o){return o.t.toLowerCase().indexOf(q.toLowerCase())>-1;});
+    if(hits.length){
+      fb.innerHTML=hits.slice(0,5).map(function(o){
+        return '<a href="/'+o.id+'" style="display:block;padding:4px 0;color:#1b2340">'+esc(o.t)+'</a>';
+      }).join('');
+    }else{
+      fb.innerHTML='<span style="color:#6b7280">没有找到“'+esc(q)+'”，试试“排片”“退票”“宠物场”。</span>';
+    }
+    fb.classList.add('show');
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.searchbox')){fb.classList.remove('show');}
+  });
+  onScroll();
+})();
+</script>
+</body>
+  </html>
