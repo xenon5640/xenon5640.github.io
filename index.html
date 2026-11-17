@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>溏心次元-动画分镜与制作流程拆解</title>
+<meta name="description" content="溏心次元关注动画分镜、作画与制作流程，拆解镜头语言、原画张数与工期安排。每周整理新番分镜变化、工作室访谈和排期表，提供可核对的制作案例与入门观察方法。">
+<meta name="keywords" content="溏心次元">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='26' fill='%23e8622c'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%23ffd166'/%3E%3Cpath d='M32 6v10M32 48v10M6 32h10M48 32h10' stroke='%23fff' stroke-width='5'/%3E%3C/svg%3E">
+<style>
+:root{
+  --c-bg:#fbf7f0;
+  --c-surface:#ffffff;
+  --c-ink:#221d18;
+  --c-ink-soft:#5b5248;
+  --c-line:#e6dccd;
+  --c-primary:#d9481f;
+  --c-primary-deep:#a83414;
+  --c-accent:#f2a71b;
+  --c-accent-soft:#fff2d4;
+  --c-teal:#1f6f6b;
+  --c-teal-soft:#e2f1ef;
+  --c-warn:#7a3f9d;
+  --c-warn-soft:#f0e6f7;
+  --radius-s:6px;
+  --radius-m:10px;
+  --radius-l:18px;
+  --shadow-s:0 1px 2px rgba(34,29,24,.06);
+  --shadow-m:0 6px 18px rgba(34,29,24,.08);
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:24px;
+  --space-6:32px;
+  --space-7:48px;
+  --space-8:64px;
+  --fw-normal:400;
+  --fw-med:600;
+  --fw-bold:800;
+  --fs-xs:12px;
+  --fs-s:13px;
+  --fs-base:15.5px;
+  --fs-m:17px;
+  --fs-l:22px;
+  --fs-xl:28px;
+  --fs-2xl:36px;
+  --header-h:64px;
+  --notice-h:40px;
+  --font-sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --font-serif:"Songti SC","Noto Serif SC",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + var(--notice-h) + 8px)}
+body{font-family:var(--font-sans);background:var(--c-bg);color:var(--c-ink);line-height:1.75;font-size:var(--fs-base);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--c-primary-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.35;font-weight:var(--fw-bold)}
+h2{font-size:var(--fs-xl);margin-bottom:var(--space-5);letter-spacing:.01em}
+h3{font-size:var(--fs-m);margin-bottom:var(--space-3)}
+p{margin-bottom:var(--space-3)}
+ul,ol{margin:0 0 var(--space-3) 1.2em}
+li{margin-bottom:var(--space-2)}
+:focus-visible{outline:2.5px solid var(--c-teal);outline-offset:2px;border-radius:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--space-5)}
+
+/* 公告条 + 页头 */
+.sticky-stack{position:sticky;top:0;z-index:60}
+.notice-bar{background:var(--c-primary);color:#fff;font-size:var(--fs-s);height:var(--notice-h);display:flex;align-items:center}
+.notice-bar .wrap{display:flex;align-items:center;gap:var(--space-3);width:100%}
+.notice-tag{background:#fff;color:var(--c-primary-deep);font-weight:var(--fw-bold);font-size:var(--fs-xs);padding:1px 8px;border-radius:99px;white-space:nowrap}
+.notice-bar a{color:#fff;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.notice-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.site-header{background:rgba(251,247,240,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--c-line);height:var(--header-h)}
+.site-header .wrap{display:flex;align-items:center;gap:var(--space-4);height:100%}
+.brand{display:flex;align-items:center;gap:var(--space-2);font-weight:var(--fw-bold);font-size:var(--fs-m);color:var(--c-ink);white-space:nowrap}
+.brand:hover{text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.main-nav{margin-left:auto}
+.main-nav ul{display:flex;list-style:none;gap:var(--space-1);margin:0}
+.main-nav a{display:block;padding:6px 11px;font-size:var(--fs-s);color:var(--c-ink-soft);border-radius:99px}
+.main-nav a:hover{background:var(--c-accent-soft);color:var(--c-ink);text-decoration:none}
+.main-nav a.active{background:var(--c-primary);color:#fff}
+.header-tools{display:flex;align-items:center;gap:var(--space-2)}
+.search-box{display:flex;align-items:center;border:1px solid var(--c-line);border-radius:99px;background:#fff;padding:2px 4px 2px 12px}
+.search-box input{border:0;background:transparent;font:inherit;font-size:var(--fs-s);width:120px;padding:4px 0;color:var(--c-ink)}
+.search-box input:focus{outline:none}
+.search-box button{border:0;background:var(--c-teal);color:#fff;border-radius:99px;font-size:var(--fs-xs);padding:4px 12px;cursor:pointer;font-weight:var(--fw-med)}
+.menu-btn{display:none;border:1px solid var(--c-line);background:#fff;border-radius:var(--radius-s);width:40px;height:38px;cursor:pointer;align-items:center;justify-content:center;color:var(--c-ink)}
+.menu-btn svg{width:20px;height:20px}
+
+/* 首屏 */
+.hero{padding:var(--space-7) 0 var(--space-6);position:relative;overflow:hidden;border-bottom:1px solid var(--c-line)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-7);align-items:center}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-s);color:var(--c-primary-deep);font-weight:var(--fw-med);letter-spacing:.08em;margin-bottom:var(--space-3)}
+.hero-kicker::before{content:"";width:22px;height:2px;background:var(--c-primary)}
+.hero h1{font-size:var(--fs-2xl);letter-spacing:.02em;margin-bottom:var(--space-4)}
+.hero-lead{font-size:var(--fs-m);color:var(--c-ink-soft);max-width:34em;margin-bottom:var(--space-5)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-5)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:99px;font-size:var(--fs-s);font-weight:var(--fw-med);border:1.5px solid transparent;transition:transform .15s ease,background .15s ease}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn-primary{background:var(--c-primary);color:#fff}
+.btn-primary:hover{background:var(--c-primary-deep)}
+.btn-ghost{border-color:var(--c-line);color:var(--c-ink);background:#fff}
+.btn-ghost:hover{border-color:var(--c-teal);color:var(--c-teal)}
+.hero-stats{display:flex;gap:var(--space-6);list-style:none;margin:0;flex-wrap:wrap}
+.hero-stats li{font-size:var(--fs-s);color:var(--c-ink-soft)}
+.hero-stats b{display:block;font-size:var(--fs-l);color:var(--c-ink);font-weight:var(--fw-bold);line-height:1.2}
+.hero-visual{position:relative}
+.hero-visual svg{width:100%;height:auto;display:block}
+.hero-caption{font-size:var(--fs-xs);color:var(--c-ink-soft);margin-top:var(--space-2);text-align:right}
+
+/* 通用板块 */
+.section{padding:var(--space-7) 0}
+.section + .section{border-top:1px dashed var(--c-line)}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-5);flex-wrap:wrap}
+.section-head h2{margin:0}
+.section-head .more{font-size:var(--fs-s);white-space:nowrap}
+.section-sub{font-size:var(--fs-s);color:var(--c-ink-soft);max-width:38em;width:100%;margin-top:-var(--space-3)}
+
+/* 领域概览：标签索引 + 对照 */
+.overview-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--space-5)}
+.tag-index{display:flex;flex-wrap:wrap;gap:var(--space-2);list-style:none;margin:0}
+.tag-index a{display:inline-block;font-size:var(--fs-s);padding:5px 13px;border-radius:99px;background:#fff;border:1px solid var(--c-line);color:var(--c-ink-soft)}
+.tag-index a:hover{border-color:var(--c-primary);color:var(--c-primary-deep);text-decoration:none}
+.tag-index a.hot{background:var(--c-accent-soft);border-color:var(--c-accent);color:var(--c-primary-deep);font-weight:var(--fw-med)}
+.def-panel{background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--space-4) var(--space-5);box-shadow:var(--shadow-s)}
+.def-row{display:flex;gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px dashed var(--c-line);font-size:var(--fs-s)}
+.def-row:last-child{border-bottom:0}
+.def-row dt{flex:none;width:5.5em;color:var(--c-teal);font-weight:var(--fw-med)}
+.def-row dd{margin:0;color:var(--c-ink-soft)}
+
+/* 精选推荐：网格卡片 */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);list-style:none;margin:0}
+.card{background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-m)}
+.card img{width:100%;height:150px;object-fit:cover}
+.card-body{padding:var(--space-4);display:flex;flex-direction:column;flex:1}
+.card-meta{font-size:var(--fs-xs);color:var(--c-ink-soft);display:flex;gap:var(--space-2);margin-bottom:var(--space-2)}
+.card-meta .pill{background:var(--c-teal-soft);color:var(--c-teal);padding:0 8px;border-radius:99px;font-weight:var(--fw-med)}
+.card h3{font-size:var(--fs-base);margin-bottom:var(--space-2)}
+.card p{font-size:var(--fs-s);color:var(--c-ink-soft);margin:0}
+
+/* 最新更新：紧凑列表 */
+.compact-list{list-style:none;margin:0;border-top:1px solid var(--c-line)}
+.compact-list li{display:grid;grid-template-columns:92px 1fr auto;gap:var(--space-3);align-items:baseline;padding:var(--space-3) 0;border-bottom:1px solid var(--c-line);margin:0;font-size:var(--fs-s)}
+.compact-list time{color:var(--c-ink-soft);font-variant-numeric:tabular-nums}
+.compact-list .tag{font-size:var(--fs-xs);background:var(--c-accent-soft);color:var(--c-primary-deep);padding:1px 9px;border-radius:99px;white-space:nowrap}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);list-style:none;margin:0}
+.cat-grid a{display:block;background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--space-4);height:100%;color:var(--c-ink)}
+.cat-grid a:hover{border-color:var(--c-teal);text-decoration:none}
+.cat-grid b{display:block;font-size:var(--fs-base);margin-bottom:2px}
+.cat-grid span{font-size:var(--fs-xs);color:var(--c-ink-soft)}
+
+/* 深度解析 */
+.deep{background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-l);padding:var(--space-6);box-shadow:var(--shadow-s);max-width:900px;margin:0 auto}
+.deep h2{font-size:var(--fs-xl)}
+.deep .lead{font-size:var(--fs-m);color:var(--c-ink);border-left:4px solid var(--c-primary);padding-left:var(--space-4);margin-bottom:var(--space-5)}
+.deep h3{color:var(--c-primary-deep);margin-top:var(--space-5)}
+.deep p{color:#332c25}
+.deep blockquote{margin:var(--space-4) 0;padding:var(--space-3) var(--space-4);background:var(--c-teal-soft);border-radius:var(--radius-s);font-size:var(--fs-s);color:var(--c-teal)}
+.verify{background:var(--c-accent-soft);border:1px solid #ecd29a;border-radius:var(--radius-m);padding:var(--space-4);margin:var(--space-4) 0}
+.verify h4{font-size:var(--fs-s);color:var(--c-primary-deep);margin-bottom:var(--space-2)}
+.verify ol{font-size:var(--fs-s);margin-bottom:0}
+.verify li{margin-bottom:var(--space-1)}
+
+/* 体验指南：编号步骤 */
+.steps{list-style:none;counter-reset:step;margin:0;display:grid;gap:var(--space-3)}
+.steps li{counter-increment:step;background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--space-4) var(--space-4) var(--space-4) 64px;position:relative;margin:0}
+.steps li::before{content:counter(step,decimal-leading-zero);position:absolute;left:var(--space-4);top:var(--space-4);font-size:var(--fs-l);font-weight:var(--fw-bold);color:var(--c-accent);font-variant-numeric:tabular-nums}
+.steps h3{font-size:var(--fs-base);margin-bottom:var(--space-1)}
+.steps p{font-size:var(--fs-s);color:var(--c-ink-soft);margin:0}
+
+/* FAQ */
+.faq details{background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);margin-bottom:var(--space-3);overflow:hidden}
+.faq summary{cursor:pointer;padding:var(--space-4);font-weight:var(--fw-med);font-size:var(--fs-base);list-style:none;display:flex;justify-content:space-between;gap:var(--space-3)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--c-primary);font-weight:var(--fw-bold);flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq details[open] summary{background:var(--c-accent-soft)}
+.faq .faq-body{padding:0 var(--space-4) var(--space-4);font-size:var(--fs-s);color:var(--c-ink-soft)}
+
+/* 用户评论 */
+.comments{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4);list-style:none;margin:0}
+.comment{background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--space-4);font-size:var(--fs-s);margin:0}
+.comment .who{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2);font-size:var(--fs-xs);color:var(--c-ink-soft)}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--c-teal-soft);color:var(--c-teal);display:flex;align-items:center;justify-content:center;font-weight:var(--fw-bold);font-size:var(--fs-xs);flex:none}
+.comment p{margin:0}
+.comment.neg{border-left:3px solid var(--c-warn)}
+.comment.pos{border-left:3px solid var(--c-teal)}
+
+/* 相关推荐标签 */
+.rec-tags{display:flex;flex-wrap:wrap;gap:var(--space-2);list-style:none;margin:0}
+.rec-tags a{display:inline-block;padding:7px 16px;background:#fff;border:1px solid var(--c-line);border-radius:99px;font-size:var(--fs-s);color:var(--c-ink)}
+.rec-tags a:hover{border-color:var(--c-primary);color:var(--c-primary-deep);text-decoration:none}
+
+/* 榜单 */
+.rank{list-style:none;counter-reset:rank;margin:0;background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);overflow:hidden}
+.rank li{counter-increment:rank;display:grid;grid-template-columns:44px 1fr auto;gap:var(--space-3);align-items:center;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--c-line);margin:0;font-size:var(--fs-s)}
+.rank li:last-child{border-bottom:0}
+.rank li::before{content:counter(rank);font-weight:var(--fw-bold);color:var(--c-primary);font-size:var(--fs-m);font-variant-numeric:tabular-nums}
+.rank .score{color:var(--c-teal);font-variant-numeric:tabular-nums}
+.rank .title b{display:block;font-size:var(--fs-base)}
+.rank .title span{color:var(--c-ink-soft);font-size:var(--fs-xs)}
+
+/* 时间线 */
+.timeline{list-style:none;margin:0;padding-left:var(--space-5);border-left:2px solid var(--c-line)}
+.timeline li{position:relative;margin-bottom:var(--space-4);font-size:var(--fs-s)}
+.timeline li::before{content:"";position:absolute;left:calc(-1 * var(--space-5) - 6px);top:6px;width:10px;height:10px;border-radius:50%;background:var(--c-primary);border:2px solid var(--c-bg)}
+.timeline time{display:block;color:var(--c-teal);font-weight:var(--fw-med);font-size:var(--fs-xs)}
+
+/* 资讯双栏 */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);list-style:none;margin:0}
+.news-item{background:#fff;border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--space-4);font-size:var(--fs-s);margin:0}
+.news-item b{font-size:var(--fs-base);display:block;margin-bottom:var(--space-1)}
+.news-item span{color:var(--c-ink-soft)}
+
+/* 页脚 */
+.site-footer{background:#241e18;color:#cdc2b4;padding:var(--space-7) 0 var(--space-5);margin-top:var(--space-6)}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--space-5)}
+.footer-brand{display:flex;align-items:center;gap:var(--space-2);color:#fff;font-weight:var(--fw-bold);font-size:var(--fs-m);margin-bottom:var(--space-3)}
+.footer-brand svg{width:30px;height:30px}
+.site-footer p{font-size:var(--fs-s);color:#a99c8c;margin-bottom:var(--space-3)}
+.site-footer h4{color:#fff;font-size:var(--fs-s);margin-bottom:var(--space-3)}
+.site-footer ul{list-style:none;margin:0}
+.site-footer li{margin-bottom:var(--space-2);font-size:var(--fs-s)}
+.site-footer a{color:#cdc2b4}
+.site-footer a:hover{color:#fff}
+.footer-bottom{border-top:1px solid #3a322a;margin-top:var(--space-5);padding-top:var(--space-4);font-size:var(--fs-xs);color:#8d8071}
+.footer-bottom .wrap{display:flex;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap}
+
+/* 回到顶部 */
+.to-top{position:fixed;right:20px;bottom:24px;width:44px;height:44px;border-radius:50%;background:var(--c-primary);color:#fff;border:0;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow-m);z-index:70}
+.to-top.show{display:flex}
+.to-top svg{width:20px;height:20px}
+
+/* 搜索反馈 */
+.search-feedback{margin-top:var(--space-3);font-size:var(--fs-s);color:var(--c-primary-deep);display:none}
+.search-feedback.show{display:block}
+
+/* 响应式 */
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:var(--space-5)}
+  .hero-visual{max-width:460px}
+  .overview-grid{grid-template-columns:1fr}
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .main-nav{position:fixed;left:0;right:0;top:calc(var(--header-h) + var(--notice-h));background:#fff;border-bottom:1px solid var(--c-line);padding:var(--space-3) var(--space-4);display:none;box-shadow:var(--shadow-m)}
+  .main-nav.open{display:block}
+  .main-nav ul{flex-direction:column;gap:2px}
+  .main-nav a{padding:10px 12px;border-radius:var(--radius-s)}
+  .menu-btn{display:flex;margin-left:auto}
+  .header-tools{margin-left:0}
+}
+@media (max-width:640px){
+  .wrap{padding:0 var(--space-4)}
+  .hero h1{font-size:var(--fs-xl)}
+  .card-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .comments{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .compact-list li{grid-template-columns:1fr;gap:2px}
+  .compact-list .tag{justify-self:start}
+  .footer-grid{grid-template-columns:1fr}
+  .search-box input{width:88px}
+  .search-box{display:none}
+  .header-tools .search-box{display:none}
+  .deep{padding:var(--space-4)}
+  .hero-stats{gap:var(--space-4)}
+  .to-top{right:14px;bottom:18px}
+  .notice-text{font-size:var(--fs-xs)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
+  .card:hover,.btn:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-stack">
+  <div class="notice-bar" role="region" aria-label="站内公告">
+    <div class="wrap">
+      <span class="notice-tag">更新</span>
+      <span class="notice-text">11月6日已更新《秋灯渡》第7话分镜表与作画张数对照，新增原画师访谈摘录两条。</span>
+      <a href="/#updates">查看更新 →</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/#top" aria-label="溏心次元首页">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="27" fill="#d9481f"/>
+          <circle cx="32" cy="32" r="15" fill="#ffd166"/>
+          <circle cx="32" cy="32" r="6" fill="#a83414"/>
+          <path d="M32 5v9M32 50v9M5 32h9M50 32h9" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        溏心次元
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="主题导航">
+        <ul>
+          <li><a href="/#overview" class="active">分镜与作画</a></li>
+          <li><a href="/#picks">本期精选</a></li>
+          <li><a href="/#channels">频道入口</a></li>
+          <li><a href="/#deep">深度拆解</a></li>
+          <li><a href="/#guide">观察指南</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#rank">口碑榜</a></li>
+        </ul>
+      </nav>
+      <div class="header-tools">
+        <form class="search-box" id="searchForm" role="search" aria-label="站内搜索">
+          <input type="search" id="searchInput" placeholder="搜分镜、作画、工期" aria-label="输入关键词搜索">
+          <button type="submit">查找</button>
+        </form>
+        <button class="menu-btn" id="menuBtn" aria-label="展开导航菜单" aria-expanded="false" aria-controls="mainNav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <div>
+        <span class="hero-kicker">动画制作观察 · 分镜与排期</span>
+        <h1 id="heroTitle">溏心次元</h1>
+        <p class="hero-lead">把一部动画从剧本、分镜、原画到上色的每一步摊开看。关注镜头语言的取舍、张数投入与工期的关系，记录工作室排期表上的真实数字，也记录那些被删掉的关键帧。11月6日更新的《秋灯渡》第7话，是目前最完整的团队协作样本。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/#deep">读深度拆解</a>
+          <a class="btn btn-ghost" href="/#updates">看本周更新</a>
+        </div>
+        <ul class="hero-stats">
+          <li><b>12</b>个制作观察频道</li>
+          <li><b>46</b>份分镜对照记录</li>
+          <li><b>8</b>家工作室访谈</li>
+          <li><b>今天</b>更新</li>
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <svg viewBox="0 0 420 340" role="img" aria-label="分镜胶片与逐帧张数示意图">
+          <rect x="0" y="0" width="420" height="340" fill="#fff" rx="16"/>
+          <rect x="18" y="26" width="384" height="112" rx="8" fill="#241e18"/>
+          <rect x="30" y="38" width="60" height="88" rx="4" fill="#fbf7f0"/>
+          <rect x="98" y="38" width="60" height="88" rx="4" fill="#fbf7f0"/>
+          <rect x="166" y="38" width="60" height="88" rx="4" fill="#fbf7f0"/>
+          <rect x="234" y="38" width="60" height="88" rx="4" fill="#ffd166"/>
+          <rect x="302" y="38" width="60" height="88" rx="4" fill="#fbf7f0"/>
+          <path d="M42 96l14-18 12 14 10-9 12 13" stroke="#d9481f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="264" cy="76" r="16" fill="none" stroke="#a83414" stroke-width="3"/>
+          <path d="M264 66v20M254 76h20" stroke="#a83414" stroke-width="3" stroke-linecap="round"/>
+          <rect x="24" y="160" width="372" height="1.5" fill="#e6dccd"/>
+          <text x="24" y="196" font-family="sans-serif" font-size="13" fill="#5b5248">逐帧张数分配（第7话 A 段落）</text>
+          <g fill="#d9481f">
+            <rect x="24" y="214" width="46" height="14" rx="3"/>
+            <rect x="82" y="214" width="72" height="14" rx="3"/>
+            <rect x="166" y="214" width="38" height="14" rx="3"/>
+            <rect x="216" y="214" width="90" height="14" rx="3"/>
+            <rect x="318" y="214" width="58" height="14" rx="3"/>
+          </g>
+          <g fill="#f2a71b">
+            <rect x="24" y="238" width="30" height="14" rx="3"/>
+            <rect x="82" y="238" width="44" height="14" rx="3"/>
+            <rect x="166" y="238" width="22" height="14" rx="3"/>
+            <rect x="216" y="238" width="60" height="14" rx="3"/>
+            <rect x="318" y="238" width="34" height="14" rx="3"/>
+          </g>
+          <g font-family="sans-serif" font-size="11" fill="#8d8071">
+            <text x="24" y="272">卡1 · 原画8张</text>
+            <text x="166" y="272">卡2 · 中割6张</text>
+            <text x="318" y="272">卡3 · 特效12张</text>
+          </g>
+          <rect x="24" y="290" width="372" height="30" rx="6" fill="#e2f1ef"/>
+          <text x="38" y="310" font-family="sans-serif" font-size="12" fill="#1f6f6b">总作画枚数 214 · 较第6话 +31 张</text>
+        </svg>
+        <p class="hero-caption">示意：动画分镜与逐帧张数分配</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 领域概览 -->
+  <section class="section" id="overview" aria-labelledby="overviewTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="overviewTitle">领域概览：先弄清这几个词</h2>
+        <a class="more" href="/#guide">从观察入门开始 →</a>
+      </div>
+      <p class="section-sub">分镜、原画、演出、作画监督各管一段。把职能分清，再看一部片子为什么在某个镜头突然变样，才不至于只留下“崩了”或“神了”两句评语。</p>
+      <div class="overview-grid">
+        <div>
+          <h3>站内常见检索词</h3>
+          <ul class="tag-index">
+            <li><a href="/#deep" class="hot">动画分镜表怎么看</a></li>
+            <li><a href="/#deep">原画与中割区别</a></li>
+            <li><a href="/#guide">作画监督修正</a></li>
+            <li><a href="/#updates">演出站位</a></li>
+            <li><a href="/#channels">动画工期排期</a></li>
+            <li><a href="/#guide">关键帧张数</a></li>
+            <li><a href="/#faq">一原二原</a></li>
+            <li><a href="/#channels">美术设定</a></li>
+            <li><a href="/#rank">摄影处理</a></li>
+            <li><a href="/#channels">layout 构图</a></li>
+            <li><a href="/#guide">分镜卡用法</a></li>
+            <li><a href="/#faq">作画崩坏判断</a></li>
+            <li><a href="/#deep">镜头时长节奏</a></li>
+            <li><a href="/#rank">上色指定</a></li>
+            <li><a href="/#channels">声画同步</a></li>
+          </ul>
+        </div>
+        <dl class="def-panel">
+          <div class="def-row"><dt>分镜</dt><dd>用画面与文字逐卡记录镜头运动、台词与时长，是整部片子的施工图。</dd></div>
+          <div class="def-row"><dt>原画</dt><dd>定下动作关键姿态与表情，一般由一原与二原两层构成。</dd></div>
+          <div class="def-row"><dt>中割</dt><dd>在原画之间补齐过渡帧，决定运动的顺滑程度。</dd></div>
+          <div class="def-row"><dt>作监</dt><dd>统一角色比例与脸型，修正张数常被计入总工时。</dd></div>
+          <div class="def-row"><dt>演出</dt><dd>负责单集镜头节奏与表演细节，与分镜互为约束。</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 本期精选 -->
+  <section class="section" id="picks" aria-labelledby="picksTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="picksTitle">本期精选：三份可对照的记录</h2>
+        <a class="more" href="/#updates">更多更新 →</a>
+      </div>
+      <ul class="card-grid">
+        <li class="card">
+          <img src="https://picsum.photos/seed/tangxin-storyboard/600/360" width="600" height="360" loading="lazy" alt="分镜表上密排的镜头卡与时长标注">
+          <div class="card-body">
+            <div class="card-meta"><span class="pill">分镜</span><time datetime="2026-11-06">11月6日</time></div>
+            <h3>《秋灯渡》第7话分镜表逐卡拆读</h3>
+            <p>雨夜过桥一镜用 6 卡 14 秒完成，比第6话同场景少 2 卡，节奏反而更慢，原因在镜头内的表演密度。</p>
+          </div>
+        </li>
+        <li class="card">
+          <img src="https://picsum.photos/seed/tangxin-keyframe/600/360" width="600" height="360" loading="lazy" alt="原画台前排人物姿态草稿与红笔修正线">
+          <div class="card-body">
+            <div class="card-meta"><span class="pill">作画</span><time datetime="2026-11-04">11月4日</time></div>
+            <h3>作画监督修正在哪些镜头最费时</h3>
+            <p>四人团队对谈里提到，侧脸和手部特写占修正工时六成，同一帧反复改三次属于常态。</p>
+          </div>
+        </li>
+        <li class="card">
+          <img src="https://picsum.photos/seed/tangxin-schedule/600/360" width="600" height="360" loading="lazy" alt="制作排期白板上按周分栏的任务便签">
+          <div class="card-body">
+            <div class="card-meta"><span class="pill">排期</span><time datetime="2026-10-30">10月30日</time></div>
+            <h3>12集季番的排期底线是怎么算出来的</h3>
+            <p>从分镜完成到播出只留 7 周缓冲，任何一集作监超过 5 天返工，后排就直接压到首播当日。</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 最新更新 -->
+  <section class="section" id="updates" aria-labelledby="updatesTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="updatesTitle">最新更新</h2>
+        <a class="more" href="/#deep">跳到深度拆解 →</a>
+      </div>
+      <ul class="compact-list">
+        <li><time datetime="2026-11-08">今天 09:20</time><span>《秋灯渡》第7话 A 段作画枚数对照表上线，标明原画 8 张、中割 6 张的卡号位置。</span><span class="tag">分镜表</span></li>
+        <li><time datetime="2026-11-07">昨天 18:05</time><span>收录原画师林渡在个人账号的一条补充说明，澄清第6话桥段并非重画，而是分镜阶段就改过两版。</span><span class="tag">访谈</span></li>
+        <li><time datetime="2026-11-06">11月6日</time><span>《雾港来信》第3话演出笔记整理，标注三处镜头时长由 2.5 秒改为 3.2 秒的判断依据。</span><span class="tag">演出</span></li>
+        <li><time datetime="2026-11-05">11月5日</time><span>新增“作画监督修正工时”观察条目，按侧脸、手部、全身三类分列四个工作室的返工天数。</span><span class="tag">作画</span></li>
+        <li><time datetime="2026-11-03">11月3日</time><span>《长夜拾光》原画展现场记录，展出的第9话分镜稿与成片有三处镜头顺序不同。</span><span class="tag">展陈</span></li>
+        <li><time datetime="2026-10-31">10月31日</time><span>整理三家工作室 2026 秋季档排期表，标出分镜完成日与首播日之间的缓冲周数。</span><span class="tag">排期</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 频道入口 -->
+  <section class="section" id="channels" aria-labelledby="channelsTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="channelsTitle">频道入口</h2>
+      </div>
+      <ul class="cat-grid">
+        <li><a href="/#deep"><b>分镜表拆读</b><span>逐卡看镜头时长与运动</span></a></li>
+        <li><a href="/#deep"><b>原画与中割</b><span>关键帧张数与作画流程</span></a></li>
+        <li><a href="/#guide"><b>作画监督修正</b><span>返工工时与修正重点</span></a></li>
+        <li><a href="/#channels"><b>演出笔记</b><span>单集节奏与表演安排</span></a></li>
+        <li><a href="/#channels"><b>layout 构图</b><span>空间关系与镜头站位</span></a></li>
+        <li><a href="/#updates"><b>工期与排期</b><span>缓冲周与交付节点</span></a></li>
+        <li><a href="/#rank"><b>美术设定</b><span>背景色指定与光影</span></a></li>
+        <li><a href="/#rank"><b>摄影处理</b><span>合成与后期滤镜</span></a></li>
+        <li><a href="/#faq"><b>声画同步</b><span>配音与口型对位</span></a></li>
+        <li><a href="/#faq"><b>工作室访谈</b><span>团队规模与协作方式</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 深度解析 -->
+  <section class="section" id="deep" aria-labelledby="deepTitle">
+    <div class="wrap">
+      <article class="deep">
+        <h2 id="deepTitle">深度解析：作画张数增加，未必让动作更好看</h2>
+        <p class="lead">《秋灯渡》第7话总作画枚数 214 张，比第6话多 31 张，但雨夜过桥那一段的观感反而更克制。张数投入和画面质量之间没有直线关系，真正决定观感的是分镜阶段就定下的镜头密度与表演节奏。</p>
+
+        <h3>一、214 张对 183 张：多出来的张数去了哪</h3>
+        <p>第6话第12卡是一个 4 秒的连续跑动，原画 8 张、中割 21 张，靠大量补间把速度堆出来。第7话第3卡同样写跑动，原画 8 张，中割只用了 6 张，动作被切成三段短促停顿，每段之间留 0.2 秒静止。多出来的 31 张集中在片尾特效段，第9卡一次上了 22 张原画，用来画灯影在水面碎开。两处投入方向完全不同，一个是让动作变快，一个是让静止画面里出现更多细节。</p>
+        <p>把两个编号并排看会更清楚：第6话第12卡每秒 7.25 张，第7话第3卡每秒 3.5 张。前者看着流畅，后者在播放器里逐帧停住时，会发现中间有大量重复姿态。这不是省工，是分镜在那一卡只写了“短促三步，停一拍”。张数服从的是卡上文字，不是动作本身的物理复杂度。</p>
+
+        <h3>二、分镜阶段改两版，成片顺序与首版不同</h3>
+        <p>据原画师林渡 11月7日的账号发言，第6话桥段在分镜阶段改过两版：首版是主角直接跑过桥，第二版加了回头一次，最终成片用的是第二版，但把回头镜头挪到了第7话开头。这条说法与《雾港来信》第3话演出笔记里“镜头可跨集调配”的记录相互吻合。需要分清的是：改分镜是事实，挪到下一集是制作会议的决定，其具体开会日期没有公开，只能算转述。</p>
+        <blockquote>“同一段动作在不同集里拆开，观众记住的是桥，不是集数。”——林渡在访谈中的原话，11月7日摘录</blockquote>
+
+        <div class="verify">
+          <h4>可核对的四项判断</h4>
+          <ol>
+            <li>第7话总作画枚数 214，第6话 183，差值 31，可在两张作画枚数表上逐卡加总。</li>
+            <li>第7话第3卡中割 6 张，第6话第12卡中割 21 张，数字来自分镜表备注栏。</li>
+            <li>雨夜过桥段落镜头数由 8 卡减为 6 卡，总时长由 13 秒增到 14 秒。</li>
+            <li>分镜改两版的说法来自林渡账号，成片顺序调整来自演出笔记，两者来源不同，不能合并成同一句话。</li>
+          </ol>
+        </div>
+
+        <h3>三、缓冲周从 7 周压到 5 周，修正工时被挤到哪</h3>
+        <p>把第7话的制作节点排开：分镜完成 9月18日，layout 完成 10月2日，原画完成 10月21日，作监修正 10月22日至 10月28日，上色 10月29日至 11月3日，摄影合成 11月4日至 11月6日，11月7日交片。作监修正只有 7 天，比第6话少 4 天。对比同期《长夜拾光》第9话，作监修正排了 12 天，最终成片里侧脸比例出现两次不一致，制作方在 11月5日的说明里承认是“修正周期紧、二原未能全部过手”。</p>
+        <p>可以反驳的地方在这里：也有团队在 5 天修正里做出稳定成片，靠的是作监只修关键卡、其余交给二原自行对齐。这说明缓冲周短不一定导致画面问题，前提是二原具备独立判断角色比例的能力。第7话雨夜段落的侧脸基本一致，是因为那 6 张卡的二原由同一人完成，不是排期宽松换来的。</p>
+
+        <h3>四、判断镜头是否“崩”的三条口径</h3>
+        <p>第一条看同一角色在相邻两卡的脸部比例是否统一，可拿分镜表卡号定位；第二条看动作中间帧是否有未处理的线条断裂，通常在作监修正表里会标注复修次数；第三条看镜头运动与背景透视是否共用一个消失点，layout 阶段就会暴露。三条都过不了，才谈得上制作层面的失误；只过不了第三条，多半是演出选择而非作画问题。第5话那个被反复讨论的远景，三条里只有第三条不合格，制作方在 10月28日的回应里也把原因归到镜头运动上。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 体验指南 -->
+  <section class="section" id="guide" aria-labelledby="guideTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="guideTitle">体验指南：第一次看分镜表怎么下手</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>先看卡号和时长，别急着翻画面</h3>
+          <p>一份分镜表通常按卡编号，每卡右侧标时长，单位是秒。先把 20 卡以内的段落时长加总，和成片对应段落比对，差值超过 1 秒就说明有镜头被增删。</p>
+        </li>
+        <li>
+          <h3>找“固定”与“移动”两种标注</h3>
+          <p>卡上写“固定”表示摄影机不动，写“pan”“track up”则表示机位或镜头有位移。移动镜头在中割阶段张数消耗明显更高，能提前预判哪几卡最费工。</p>
+        </li>
+        <li>
+          <h3>对照原画张数与中割张数</h3>
+          <p>原画张数多，说明关键姿态密集；中割多，说明过渡长。两者比例可粗略判断动作密度，跑动镜头常见原画 6 至 10 张配中割 15 张以上。</p>
+        </li>
+        <li>
+          <h3>查作监修正表里的复修次数</h3>
+          <p>修正表会记录每卡被返工的次数，超过 3 次的卡往往对应成片里最不稳定的镜头。把卡号抄下来，再回看成片，能验证判断是否准确。</p>
+        </li>
+        <li>
+          <h3>把 layout 与成片并排看透视</h3>
+          <p>layout 阶段定下的消失点与地平线，在成片里若发生偏移，多半是摄影合成做了裁切。先看空间关系，再看角色，顺序反了容易把构图问题误判成作画失误。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="faqTitle">常见问题</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>动画分镜表上的时长标注，和成片实际时长为什么对不上？</summary>
+          <div class="faq-body">分镜阶段的时长是估读值，通常以 0.5 秒为单位。进入 layout 与演出环节后，镜头会因表演需要被拉长或压缩，成片时长以摄影合成后的版本为准。差值在 1 秒以内属于正常调整，超过 2 秒说明有镜头增删。</div>
+        </details>
+        <details>
+          <summary>原画和中割到底怎么分工，一原二原又是什么关系？</summary>
+          <div class="faq-body">原画负责关键姿态，一原通常由资深原画师画主要动作与表情，二原在一原基础上补细节并统一比例。中割由动画师在原画之间补齐过渡帧。一原与二原的分界因团队而异，小团队常由同一人完成两段。</div>
+        </details>
+        <details>
+          <summary>作画监督修正要花多少天，为什么有的集数特别久？</summary>
+          <div class="faq-body">修正周期按卡数算，一集 300 卡左右的季番通常排 7 至 12 天。侧脸、手部特写和多人同框的卡最费时，返工次数超过 3 次的卡会拖长整段。排期紧的集数会只修关键卡，其余交给二原对齐。</div>
+        </details>
+        <details>
+          <summary>看到角色脸型突然变化，算不算作画崩坏？</summary>
+          <div class="faq-body">先确认是同一集内的相邻卡，还是跨集。同一集内比例突变，多半是作监修正未覆盖；跨集变化常由不同作监的风格差异造成，属于可预期的范围。判断时把分镜表卡号记下，再对照修正表复修次数，结论会比单看截图可靠。</div>
+        </details>
+        <details>
+          <summary>季番排期表上的缓冲周，具体指哪一段时间？</summary>
+          <div class="faq-body">缓冲周指分镜完成到首播之间的余量周数，通常安排在原画完成与上色之间。7 周缓冲表示每集留 7 周可调配，压到 5 周时修正与合成两段会被同时挤压，返工空间随之变小。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用户评论 -->
+  <section class="section" id="comments" aria-labelledby="commentsTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="commentsTitle">观众怎么说</h2>
+      </div>
+      <ul class="comments">
+        <li class="comment pos">
+          <div class="who"><span class="avatar">阿</span>阿柚 · 11月7日</div>
+          <p>第7话第9卡的灯影碎开，是我这个季度停下来逐帧看最多次的一段。22 张原画全花在水面细节上，值。</p>
+        </li>
+        <li class="comment neg">
+          <div class="who"><span class="avatar">北</span>北岸 · 11月6日</div>
+          <p>雨夜过桥那段中割只有 6 张，跑动看着像在三步一停，接受不了。分镜写“停一拍”不代表观众要看慢动作。</p>
+        </li>
+        <li class="comment">
+          <div class="who"><span class="avatar">七</span>七号座 · 11月5日</div>
+          <p>《长夜拾光》第9话侧脸比例确实有两次不一致，11月5日那份说明里承认修正周期紧，态度还行，但成片没改。</p>
+        </li>
+        <li class="comment neg">
+          <div class="who"><span class="avatar">K</span>Kaze · 11月4日</div>
+          <p>排期表整理得清楚，可 7 周缓冲那一栏没有标出哪几集真的用了 7 周，只给了平均值，参考价值打了折扣。</p>
+        </li>
+        <li class="comment pos">
+          <div class="who"><span class="avatar">南</span>南窗 · 11月3日</div>
+          <p>按指南第 4 步查了修正表，复修 3 次以上的卡集中在第 5 话远景，和成片观感对得上，方法有用。</p>
+        </li>
+        <li class="comment">
+          <div class="who"><span class="avatar">灯</span>灯下客 · 11月1日</div>
+          <p>林渡那条账号发言我翻了原帖，他说的是“分镜改两版”，没提挪到第7话，这部分是演出笔记里补的，别混成一句。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 相关资讯 -->
+  <section class="section" id="news" aria-labelledby="newsTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="newsTitle">相关资讯</h2>
+      </div>
+      <ul class="news-grid">
+        <li class="news-item"><b>《雾港来信》第3话演出笔记公开，三处长镜头改为 3.2 秒</b><span>10月30日发布的笔记标注了改动理由：留出环境音进入的时间。改动集中在片头两分钟。</span></li>
+        <li class="news-item"><b>《长夜拾光》原画展展出第9话分镜稿，三处镜头顺序与成片不同</b><span>展签写明“展出稿为第二版”，成片顺序调整发生在摄影合成阶段，展方未说明具体原因。</span></li>
+        <li class="news-item"><b>三家工作室秋季档排期表公布，缓冲周在 5 到 9 周之间</b><span>其中两家把分镜完成日定在首播前 14 周，剩下一家只留 11 周，原画段压缩最明显。</span></li>
+        <li class="news-item"><b>一原二原职责说明会在 11月2日举行，现场问答涉及比例统一</b><span>提问集中在跨集角色比例，回应称“以作监修正表为唯一依据”，未提及具体标准文件。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 相关推荐 -->
+  <section class="section" id="rec" aria-labelledby="recTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="recTitle">相关推荐</h2>
+      </div>
+      <ul class="rec-tags">
+        <li><a href="/#deep">动画分镜表逐卡拆读方法</a></li>
+        <li><a href="/#guide">原画张数与中割比例怎么看</a></li>
+        <li><a href="/#channels">作画监督修正工时记录</a></li>
+        <li><a href="/#updates">季番排期缓冲周对照表</a></li>
+        <li><a href="/#deep">镜头时长与节奏判断</a></li>
+        <li><a href="/#faq">一原二原职责区分</a></li>
+        <li><a href="/#rank">美术设定与色指定</a></li>
+        <li><a href="/#channels">layout 构图消失点检查</a></li>
+        <li><a href="/#faq">作画崩坏与演出选择</a></li>
+        <li><a href="/#guide">声画同步对位记录</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 榜单 -->
+  <section class="section" id="rank" aria-labelledby="rankTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="rankTitle">本季作画稳定度观察榜</h2>
+        <a class="more" href="/#comments">看观众反馈 →</a>
+      </div>
+      <p class="section-sub">按相邻两卡脸部比例一致率、修正表复修次数、layout 消失点偏移三项打分，满分 10 分。样本为已播出的前 7 话，只作观察记录，不代表整季定论。</p>
+      <ol class="rank">
+        <li><span class="title"><b>《长夜拾光》</b><span>第9话侧脸两次不一致，修正周期 12 天</span></span><span class="score">8.2</span></li>
+        <li><span class="title"><b>《雾港来信》</b><span>长镜头多，消失点统一，修正 9 天</span></span><span class="score">8.7</span></li>
+        <li><span class="title"><b>《秋灯渡》</b><span>雨夜段落稳定，片尾特效张数集中，修正 7 天</span></span><span class="score">8.4</span></li>
+        <li><span class="title"><b>《青苔列车》</b><span>多人同框卡返工 4 次，排期只留 5 周</span></span><span class="score">7.5</span></li>
+        <li><span class="title"><b>《山雀与钟》</b><span>背景色指定稳定，动作卡中割偏少</span></span><span class="score">7.9</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 时间线 -->
+  <section class="section" id="timeline" aria-labelledby="timelineTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="timelineTitle">《秋灯渡》第7话制作时间线</h2>
+      </div>
+      <ul class="timeline">
+        <li><time datetime="2026-09-18">9月18日</time>分镜完成，共 318 卡，雨夜过桥段定 6 卡 14 秒。</li>
+        <li><time datetime="2026-10-02">10月2日</time>layout 完成，第9卡灯影水面透视改过一次消失点。</li>
+        <li><time datetime="2026-10-21">10月21日</time>原画完成，片尾特效段原画 22 张由两人分担。</li>
+        <li><time datetime="2026-10-22">10月22日至28日</time>作监修正 7 天，复修 3 次的卡有 4 张，集中在手部特写。</li>
+        <li><time datetime="2026-11-03">11月3日</time>上色完成，色指定调整两处，背景蓝调加暗 5%。</li>
+        <li><time datetime="2026-11-06">11月6日</time>摄影合成完成，11月7日交片，8日播出。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 创作者证言 -->
+  <section class="section" id="voices" aria-labelledby="voicesTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="voicesTitle">创作者证言</h2>
+      </div>
+      <div class="overview-grid">
+        <blockquote class="def-panel" style="margin:0">
+          <p style="font-size:var(--fs-m);color:var(--c-ink)">“分镜上写停一拍，原画就得把那一拍的重量画出来。多做十张中割，只会让停的样子变假。”</p>
+          <p style="font-size:var(--fs-s);color:var(--c-ink-soft);margin:0">——原画师 林渡，11月7日访谈摘录</p>
+        </blockquote>
+        <blockquote class="def-panel" style="margin:0">
+          <p style="font-size:var(--fs-m);color:var(--c-ink)">“修正 5 天能交片，前提是二原知道哪些卡可以自己拍板。这个信任不是每集都有。”</p>
+          <p style="font-size:var(--fs-s);color:var(--c-ink-soft);margin:0">——作画监督 陈默，10月29日团队对谈记录</p>
+        </blockquote>
+      </div>
+      <p class="search-feedback" id="searchFeedback" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="27" fill="#d9481f"/>
+            <circle cx="32" cy="32" r="15" fill="#ffd166"/>
+            <circle cx="32" cy="32" r="6" fill="#a83414"/>
+            <path d="M32 5v9M32 50v9M5 32h9M50 32h9" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          溏心次元
+        </div>
+        <p>分镜、作画、排期三件事并排看，记录镜头背后的具体数字与日期。</p>
+        <p style="font-size:var(--fs-xs)">本站内容为观察与整理，条目、访谈摘录与排期数字含示例数据，引用时请核对原始来源。页面更新于 2026年11月8日，对应更新项见“最新更新”板块。</p>
+      </div>
+      <div>
+        <h4>制作观察</h4>
+        <ul>
+          <li><a href="/#deep">分镜表拆读</a></li>
+          <li><a href="/#deep">作画张数对照</a></li>
+          <li><a href="/#guide">修正工时记录</a></li>
+          <li><a href="/#channels">layout 构图</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>排期与访谈</h4>
+        <ul>
+          <li><a href="/#updates">本周更新</a></li>
+          <li><a href="/#timeline">制作时间线</a></li>
+          <li><a href="/#voices">创作者证言</a></li>
+          <li><a href="/#rank">稳定度观察榜</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>参与</h4>
+        <ul>
+          <li><a href="/#comments">观众评论</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#rec">相关推荐</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="wrap" style="padding:0">
+        <span>© 2026 溏心次元 · 内容仅供观察参考</span>
+        <span>示例数据说明：条目、访谈与排期数字为垂类示例，非官方发布</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  var menuBtn = document.getElementById('menuBtn');
+  var mainNav = document.getElementById('mainNav');
+  var toTop = document.getElementById('toTop');
+  var navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
+  var sections = [];
+
+  function closeMenu(){
+    if(!mainNav) return;
+    mainNav.classList.remove('open');
+    if(menuBtn) menuBtn.setAttribute('aria-expanded','false');
+  }
+
+  if(menuBtn){
+    menuBtn.addEventListener('click', function(){
+      var open = mainNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', open ? '收起导航菜单' : '展开导航菜单');
+    });
+  }
+
+  navLinks.forEach(function(link){
+    link.addEventListener('click', function(){
+      if(window.innerWidth <= 960) closeMenu();
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeMenu();
+  });
+
+  // 滚动高亮 + 回到顶部
+  var navMap = {};
+  navLinks.forEach(function(link){
+    var href = link.getAttribute('href') || '';
+    var id = href.indexOf('/#') === 0 ? href.slice(2) : null;
+    if(id){
+      var el = document.getElementById(id);
+      if(el){
+        navMap[id] = link;
+        sections.push({id:id, el:el});
+      }
+    }
+  });
+
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    if(toTop) toTop.classList.toggle('show', y > 500);
+    var currentId = null;
+    var offset = 130;
+    sections.forEach(function(s){
+      if(s.el.getBoundingClientRect().top - offset <= 0) currentId = s.id;
+    });
+    navLinks.forEach(function(l){ l.classList.remove('active'); });
+    if(currentId && navMap[currentId]) navMap[currentId].classList.add('active');
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, {passive:true});
+  onScroll();
+
+  if(toTop){
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'auto' : 'smooth'});
+    });
+  }
+
+  // 本地搜索
+  var form = document.getElementById('searchForm');
+  var input = document.getElementById('searchInput');
+  var feedback = document.getElementById('searchFeedback');
+  var searchable = [];
+  document.querySelectorAll('h2, h3, .compact-list li, .card h3, .news-item b, .faq summary, .rec-tags a, .rank .title b, .timeline li').forEach(function(node){
+    var text = (node.textContent || '').replace(/\s+/g,' ').trim();
+    if(text) searchable.push({text:text.toLowerCase(), node:node});
+  });
+
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var q = (input.value || '').trim().toLowerCase();
+      if(!q){ 
+        if(feedback){ feedback.textContent = '请输入要查找的关键词，例如“分镜”“作监”“排期”。'; feedback.classList.add('show'); }
+        return;
+      }
+      var hit = null;
+      for(var i=0;i<searchable.length;i++){
+        if(searchable[i].text.indexOf(q) !== -1){ hit = searchable[i]; break; }
+      }
+      if(hit){
+        if(feedback){ feedback.classList.remove('show'); feedback.textContent = ''; }
+        var target = hit.node.closest('section') || hit.node;
+        if(target && target.scrollIntoView){
+          target.scrollIntoView({behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'auto' : 'smooth', block:'start'});
+        }
+      } else {
+        if(feedback){ feedback.textContent = '没有找到与“' + input.value.trim() + '”相关的内容。可以试试“分镜”“中割”“作监”“排期”。'; feedback.classList.add('show'); }
+      }
+    });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "溏心次元",
+  "description": "关注动画分镜、作画与制作流程的观察站，记录镜头语言、原画张数与工期安排。",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "动画分镜表上的时长标注，和成片实际时长为什么对不上？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "分镜阶段的时长是估读值，通常以 0.5 秒为单位。进入 layout 与演出环节后，镜头会因表演需要被拉长或压缩，成片时长以摄影合成后的版本为准。差值在 1 秒以内属于正常调整，超过 2 秒说明有镜头增删。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "原画和中割到底怎么分工，一原二原又是什么关系？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "原画负责关键姿态，一原通常由资深原画师画主要动作与表情，二原在一原基础上补细节并统一比例。中割由动画师在原画之间补齐过渡帧。一原与二原的分界因团队而异，小团队常由同一人完成两段。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "作画监督修正要花多少天，为什么有的集数特别久？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "修正周期按卡数算，一集 300 卡左右的季番通常排 7 至 12 天。侧脸、手部特写和多人同框的卡最费时，返工次数超过 3 次的卡会拖长整段。排期紧的集数会只修关键卡，其余交给二原对齐。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "看到角色脸型突然变化，算不算作画崩坏？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先确认是同一集内的相邻卡，还是跨集。同一集内比例突变，多半是作监修正未覆盖；跨集变化常由不同作监的风格差异造成，属于可预期的范围。判断时把分镜表卡号记下，再对照修正表复修次数，结论会比单看截图可靠。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "季番排期表上的缓冲周，具体指哪一段时间？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "缓冲周指分镜完成到首播之间的余量周数，通常安排在原画完成与上色之间。7 周缓冲表示每集留 7 周可调配，压到 5 周时修正与合成两段会被同时挤压，返工空间随之变小。"
+      }
+    }
+  ]
+}
+</script>
+</body>
+          </html>
